@@ -1,0 +1,2469 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#ffffff">
+
+  <title>NAFA.FASHION | Toko Pakaian Pilihan</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    :root {
+      --putih: #ffffff;
+      --hitam: #171717;
+      --abu: #777777;
+      --latar: #f6f7f3;
+      --garis: #e9eae5;
+      --lime: #c5f36b;
+      --hijau: #789d35;
+      --radius: 16px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--putih);
+      color: var(--hitam);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .wadah {
+      width: min(1180px, 92%);
+      margin: auto;
+    }
+    /* =========================
+   NAVIGASI
+========================= */
+
+.navigasi {
+  height: 76px;
+  border-bottom: 1px solid var(--garis);
+  background: rgba(255,255,255,.96);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.isi-navigasi {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo-toko {
+  font-family: Manrope, sans-serif;
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -1px;
+}
+
+.logo-toko span,
+.isi-kaki strong span {
+  color: #91bd43;
+}
+
+.menu-navigasi {
+  display: flex;
+  gap: 34px;
+}
+
+.menu-navigasi a {
+  font-size: 13px;
+  color: var(--abu);
+  transition: .2s;
+}
+
+.menu-navigasi a:hover {
+  color: var(--hitam);
+}
+
+.tombol-keranjang {
+  border: 1px solid var(--garis);
+  background: white;
+  padding: 11px 16px;
+  border-radius: 30px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.tombol-keranjang span {
+  background: var(--lime);
+  padding: 4px 7px;
+  border-radius: 20px;
+  margin-left: 5px;
+}
+
+/* =========================
+   BERANDA
+========================= */
+
+.beranda {
+  min-height: 560px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 50px;
+  padding-top: 65px;
+  padding-bottom: 65px;
+}
+
+.label-kecil {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+  color: var(--hijau);
+}
+
+.isi-beranda h1 {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(38px, 5vw, 64px);
+  line-height: 1.08;
+  letter-spacing: -3px;
+  margin: 22px 0;
+}
+
+.isi-beranda h1 span,
+.judul-bagian h2 span,
+.isi-tentang h2 span {
+  color: #91bd43;
+}
+
+.isi-beranda > p {
+  color: var(--abu);
+  line-height: 1.8;
+  font-size: 14px;
+  max-width: 390px;
+}
+
+.tombol-utama {
+  display: inline-flex;
+  align-items: center;
+  gap: 30px;
+  background: var(--hitam);
+  color: white;
+  padding: 16px 21px;
+  border-radius: 5px;
+  margin-top: 30px;
+  font-size: 12px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.tombol-utama:hover {
+  background: var(--hijau);
+}
+
+.catatan-beranda {
+  margin-top: 35px;
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--abu);
+  display: flex;
+  align-items: center;
+  gap: 9px;
+}
+
+.catatan-beranda span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #91bd43;
+}
+
+/* =========================
+   GAMBAR BERANDA
+========================= */
+
+.visual-beranda {
+  position: relative;
+  min-height: 390px;
+}
+
+.gambar-utama {
+  height: 390px;
+  background: #e9eddf;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #65734e;
+  position: relative;
+  overflow: hidden;
+}
+
+.gambar-utama::before {
+  content: "";
+  position: absolute;
+  width: 270px;
+  height: 270px;
+  border: 1px solid rgba(101,115,78,.2);
+  border-radius: 50%;
+}
+
+.gambar-utama span {
+  font-family: Manrope, sans-serif;
+  font-weight: 800;
+  font-size: 36px;
+  letter-spacing: -2px;
+  z-index: 1;
+}
+
+.gambar-utama small {
+  position: absolute;
+  bottom: 20px;
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+
+.label-gambar {
+  position: absolute;
+  bottom: -18px;
+  left: -22px;
+  background: var(--lime);
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transform: rotate(-4deg);
+}
+
+.label-gambar strong {
+  font-size: 28px;
+}
+
+.label-gambar span {
+  font-size: 9px;
+  line-height: 1.5;
+  font-weight: 800;
+}
+
+/* =========================
+   PITA INFORMASI
+========================= */
+
+.pita-informasi {
+  background: var(--hitam);
+  color: white;
+  padding: 19px 0;
+}
+
+.isi-pita {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  overflow: hidden;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  white-space: nowrap;
+}
+
+.isi-pita span:nth-child(even) {
+  color: var(--lime);
+}
+
+/* =========================
+   KATALOG
+========================= */
+
+.bagian-koleksi {
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
+.judul-bagian {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+}
+
+.judul-bagian h2 {
+  font-family: Manrope, sans-serif;
+  font-size: 42px;
+  letter-spacing: -2px;
+  margin-top: 12px;
+}
+
+.judul-bagian > p {
+  color: var(--abu);
+  font-size: 12px;
+  line-height: 1.7;
+  max-width: 250px;
+}
+
+.alat-katalog {
+  border-top: 1px solid var(--garis);
+  border-bottom: 1px solid var(--garis);
+  margin-top: 40px;
+  padding: 17px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.alat-katalog > span {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1px;
+}
+
+.alat-katalog select {
+  border: 1px solid var(--garis);
+  background: white;
+  padding: 9px 12px;
+  border-radius: 4px;
+  font-size: 11px;
+}
+
+.daftar-produk {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 22px;
+  margin-top: 28px;
+}
+
+.status-memuat {
+  grid-column: 1 / -1;
+  padding: 60px 10px;
+  text-align: center;
+  color: var(--abu);
+  font-size: 12px;
+}
+
+.pemutar {
+  width: 25px;
+  height: 25px;
+  border: 2px solid var(--garis);
+  border-top-color: #91bd43;
+  border-radius: 50%;
+  margin: 0 auto 13px;
+  animation: putar .8s linear infinite;
+}
+
+@keyframes putar {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* =========================
+   TENTANG KAMI
+========================= */
+
+.bagian-tentang {
+  background: var(--latar);
+  padding: 90px 0;
+}
+
+.isi-tentang {
+  text-align: center;
+}
+
+.isi-tentang h2 {
+  font-family: Manrope, sans-serif;
+  font-size: clamp(35px, 5vw, 54px);
+  line-height: 1.15;
+  letter-spacing: -2px;
+  margin: 20px 0;
+}
+
+.isi-tentang p {
+  max-width: 460px;
+  margin: auto;
+  color: var(--abu);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================
+   KAKI HALAMAN
+========================= */
+
+.kaki-halaman {
+  padding: 35px 0;
+  border-top: 1px solid var(--garis);
+}
+
+.isi-kaki {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.isi-kaki strong {
+  font-family: Manrope, sans-serif;
+  font-size: 17px;
+}
+
+.isi-kaki p,
+.isi-kaki small {
+  color: var(--abu);
+  font-size: 10px;
+}
+
+/* =========================
+   TAMPILAN HP
+========================= */
+
+@media (max-width: 700px) {
+
+  .navigasi {
+    height: 65px;
+  }
+
+  .logo-toko {
+    font-size: 17px;
+  }
+
+  .menu-navigasi {
+    display: none;
+  }
+
+  .beranda {
+    grid-template-columns: 1fr;
+    gap: 35px;
+    padding-top: 55px;
+    padding-bottom: 55px;
+  }
+
+  .isi-beranda h1 {
+    font-size: 43px;
+  }
+
+  .visual-beranda,
+  .gambar-utama {
+    min-height: 300px;
+    height: 300px;
+  }
+
+  .gambar-utama span {
+    font-size: 30px;
+  }
+
+  .label-gambar {
+    left: -8px;
+  }
+
+  .isi-pita {
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  .bagian-koleksi {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+
+  .judul-bagian {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .judul-bagian h2 {
+    font-size: 35px;
+  }
+
+  .daftar-produk {
+    grid-template-columns: repeat(2, minmax(0,1fr));
+    gap: 12px;
+  }
+
+  .isi-kaki {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+    /* =========================
+   KARTU PRODUK
+========================= */
+
+.kartu-produk {
+  min-width: 0;
+  background: white;
+  border: 1px solid var(--garis);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: .25s;
+}
+
+.kartu-produk:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0,0,0,.06);
+}
+
+.foto-produk {
+  height: 240px;
+  background: #f0f1ec;
+  position: relative;
+  overflow: hidden;
+}
+
+.foto-produk img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.foto-kosong {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #9a9d91;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 2px;
+}
+
+.label-kondisi {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--lime);
+  color: var(--hitam);
+  padding: 6px 9px;
+  font-size: 9px;
+  font-weight: 800;
+  border-radius: 3px;
+}
+
+.info-produk {
+  padding: 15px;
+}
+
+.nama-produk {
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.4;
+  margin-bottom: 7px;
+}
+
+.detail-produk {
+  color: var(--abu);
+  font-size: 11px;
+  margin-bottom: 12px;
+}
+
+.harga-produk {
+  font-size: 15px;
+  font-weight: 800;
+  margin-bottom: 13px;
+}
+
+.tombol-tambah {
+  width: 100%;
+  border: 0;
+  background: var(--hitam);
+  color: white;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.tombol-tambah:hover {
+  background: var(--hijau);
+}
+
+.tombol-tambah:disabled {
+  background: #d5d5d5;
+  color: #777;
+  cursor: not-allowed;
+}
+
+.produk-kosong {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 55px 15px;
+  border: 1px dashed var(--garis);
+  color: var(--abu);
+  font-size: 13px;
+  line-height: 1.8;
+}
+
+/* =========================
+   NOTIFIKASI DALAM HALAMAN
+========================= */
+
+.wadah-notifikasi {
+  position: fixed;
+  z-index: 9999;
+  top: 85px;
+  right: 18px;
+  width: min(340px, calc(100% - 36px));
+  pointer-events: none;
+}
+
+.notifikasi {
+  background: var(--hitam);
+  color: white;
+  padding: 15px 17px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+  box-shadow: 0 8px 25px rgba(0,0,0,.15);
+  border-left: 4px solid var(--lime);
+  animation: masukNotifikasi .25s ease;
+}
+
+.notifikasi.gagal {
+  border-left-color: #e87979;
+}
+
+@keyframes masukNotifikasi {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 700px) {
+  .foto-produk {
+    height: 190px;
+  }
+
+  .info-produk {
+    padding: 11px;
+  }
+
+  .nama-produk {
+    font-size: 12px;
+  }
+
+  .harga-produk {
+    font-size: 13px;
+  }
+}
+    /* =========================
+   KERANJANG BELANJA
+========================= */
+
+.lapisan-keranjang {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.lapisan-keranjang.aktif {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.latar-keranjang {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.38);
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+.lapisan-keranjang.aktif .latar-keranjang {
+  opacity: 1;
+}
+
+.panel-keranjang {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(440px, 100%);
+  height: 100%;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  transform: translateX(100%);
+  transition: transform .3s ease;
+  box-shadow: -10px 0 40px rgba(0,0,0,.08);
+}
+
+.lapisan-keranjang.aktif .panel-keranjang {
+  transform: translateX(0);
+}
+
+.kepala-keranjang {
+  padding: 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--garis);
+}
+
+.teks-kecil {
+  color: var(--hijau);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 2px;
+}
+
+.kepala-keranjang h2 {
+  font-size: 25px;
+  margin-top: 5px;
+}
+
+.tutup-keranjang {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--garis);
+  background: white;
+  border-radius: 50%;
+  font-size: 17px;
+}
+
+.isi-keranjang {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px 25px;
+}
+
+.keranjang-kosong {
+  text-align: center;
+  padding: 65px 10px;
+  color: var(--abu);
+}
+
+.ikon-kosong {
+  font-size: 45px;
+  margin-bottom: 15px;
+}
+
+.keranjang-kosong h3 {
+  color: var(--hitam);
+  font-size: 17px;
+  margin-bottom: 8px;
+}
+
+.keranjang-kosong p {
+  font-size: 13px;
+}
+
+.item-keranjang {
+  display: flex;
+  gap: 14px;
+  padding: 15px 0;
+  border-bottom: 1px solid var(--garis);
+}
+
+.foto-keranjang {
+  width: 85px;
+  height: 100px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: cover;
+  background: var(--latar);
+}
+
+.info-keranjang {
+  flex: 1;
+  min-width: 0;
+}
+
+.info-keranjang h4 {
+  font-size: 14px;
+  margin: 4px 0;
+  overflow-wrap: anywhere;
+}
+
+.info-keranjang p {
+  color: var(--abu);
+  font-size: 12px;
+  margin-bottom: 7px;
+}
+
+.harga-keranjang {
+  font-weight: 800;
+  font-size: 14px;
+}
+
+.kontrol-jumlah {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.kontrol-jumlah button {
+  width: 27px;
+  height: 27px;
+  border: 1px solid var(--garis);
+  background: white;
+  border-radius: 7px;
+}
+
+.kontrol-jumlah span {
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.hapus-item {
+  margin-left: auto;
+  border: none !important;
+  color: #d34b4b;
+  font-size: 12px;
+  background: transparent !important;
+  width: auto !important;
+}
+
+.ringkasan-keranjang {
+  padding: 22px 25px;
+  border-top: 1px solid var(--garis);
+  background: white;
+}
+
+.baris-total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 14px;
+}
+
+.baris-total strong {
+  font-size: 20px;
+}
+
+.tombol-lanjut-checkout {
+  width: 100%;
+  padding: 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--hitam);
+  color: white;
+  font-weight: 700;
+}
+
+.tombol-lanjut-checkout:disabled {
+  opacity: .35;
+  cursor: not-allowed;
+}
+
+.catatan-keranjang {
+  font-size: 11px;
+  color: var(--abu);
+  text-align: center;
+  margin-top: 12px;
+}
+
+@media(max-width: 480px) {
+  .panel-keranjang {
+    width: 100%;
+  }
+}
+    /* =========================
+   CHECKOUT
+========================= */
+
+.lapisan-checkout,
+.lapisan-hasil {
+  position: fixed;
+  inset: 0;
+  z-index: 1001;
+  display: none;
+}
+
+.lapisan-checkout.aktif,
+.lapisan-hasil.aktif {
+  display: block;
+}
+
+.latar-checkout {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.42);
+}
+
+.panel-checkout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: min(480px, 100%);
+  height: 100%;
+  overflow-y: auto;
+  background: #fff;
+  padding: 25px;
+  animation: masukCheckout .25s ease;
+}
+
+@keyframes masukCheckout {
+  from { transform: translateX(35px); opacity: .5; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+.kepala-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--garis);
+}
+
+.kepala-checkout h2 {
+  font-size: 24px;
+  margin-top: 5px;
+}
+
+.tutup-checkout {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--garis);
+  background: white;
+  border-radius: 50%;
+  font-size: 17px;
+}
+
+.form-checkout {
+  display: flex;
+  flex-direction: column;
+  padding-top: 22px;
+}
+
+.form-checkout label {
+  font-size: 13px;
+  font-weight: 700;
+  margin: 15px 0 8px;
+}
+
+.form-checkout input,
+.form-checkout textarea,
+.form-checkout select {
+  width: 100%;
+  padding: 13px;
+  border: 1px solid var(--garis);
+  border-radius: 9px;
+  background: #fff;
+  color: var(--hitam);
+  outline: none;
+  font-size: 14px;
+}
+
+.form-checkout input:focus,
+.form-checkout textarea:focus,
+.form-checkout select:focus {
+  border-color: var(--hijau);
+}
+
+.pesan-error {
+  color: #c43e3e;
+  font-size: 11px;
+  min-height: 14px;
+  margin-top: 4px;
+}
+
+.ringkasan-checkout {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 0;
+  margin-top: 20px;
+  border-top: 1px solid var(--garis);
+  border-bottom: 1px solid var(--garis);
+  font-size: 14px;
+}
+
+.ringkasan-checkout strong {
+  font-size: 20px;
+}
+
+.catatan-checkout {
+  margin: 15px 0;
+  color: var(--abu);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.pesan-checkout {
+  display: none;
+  padding: 12px;
+  margin: 12px 0;
+  border-radius: 8px;
+  background: #fff0f0;
+  color: #b83232;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.pesan-checkout.terlihat {
+  display: block;
+}
+
+.tombol-buat-pesanan {
+  width: 100%;
+  padding: 16px;
+  border: 0;
+  border-radius: 10px;
+  background: var(--hitam);
+  color: white;
+  font-weight: 700;
+}
+
+.tombol-buat-pesanan:disabled {
+  opacity: .55;
+  cursor: wait;
+}
+
+/* HASIL PEMESANAN */
+
+.lapisan-hasil {
+  z-index: 1003;
+  background: rgba(0,0,0,.5);
+  padding: 20px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+.lapisan-hasil.aktif {
+  display: flex;
+}
+
+.kartu-hasil {
+  width: min(390px, 100%);
+  padding: 30px 23px;
+  background: white;
+  border-radius: 18px;
+  text-align: center;
+}
+
+.ikon-hasil {
+  width: 55px;
+  height: 55px;
+  margin: 0 auto 18px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: #eff8e5;
+  color: #5c8c2b;
+  font-size: 28px;
+}
+
+.kartu-hasil h2 {
+  font-size: 23px;
+  margin: 8px 0;
+}
+
+.teks-hasil {
+  color: var(--abu);
+  font-size: 13px;
+  line-height: 1.5;
+  margin: 12px 0;
+}
+
+.kode-pesanan {
+  padding: 13px;
+  margin: 18px 0 10px;
+  background: var(--latar);
+  border: 1px dashed #b8c49f;
+  border-radius: 9px;
+  font-weight: 800;
+  letter-spacing: 1px;
+  overflow-wrap: anywhere;
+}
+
+.total-hasil {
+  font-size: 21px;
+  font-weight: 800;
+  margin: 12px 0;
+}
+
+.status-hasil {
+  display: inline-block;
+  padding: 7px 12px;
+  background: #fff5dc;
+  color: #936a16;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.kartu-hasil button {
+  width: 100%;
+  margin-top: 22px;
+  padding: 14px;
+  border: 0;
+  border-radius: 9px;
+  background: var(--hitam);
+  color: white;
+  font-weight: 700;
+}
+
+@media(max-width: 480px) {
+  .panel-checkout {
+    width: 100%;
+    padding: 20px;
+  }
+}
+    /* =========================
+   TOMBOL BUKTI PESANAN
+========================= */
+
+#tombolUnduhBukti {
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid var(--hitam);
+  border-radius: 9px;
+  background: var(--lime);
+  color: var(--hitam);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+#tombolUnduhBukti:disabled {
+  opacity: .6;
+  cursor: wait;
+}
+  </style>
+</head>
+
+<body>
+
+  <!-- SELURUH HALAMAN WEBSITE AKAN DIBUAT DI SINI -->
+  <div id="aplikasi">
+
+<!-- NAVIGASI -->
+<header class="navigasi">
+  <div class="wadah isi-navigasi">
+
+    <a href="#beranda" class="logo-toko">
+      NAFA<span>.</span>FASHION
+    </a>
+
+    <nav class="menu-navigasi">
+      <a href="#beranda">Beranda</a>
+      <a href="#koleksi">Koleksi</a>
+      <a href="#tentang">Tentang Kami</a>
+    </nav>
+
+    <button class="tombol-keranjang" id="tombolKeranjang">
+      Keranjang <span id="jumlahKeranjang">0</span>
+    </button>
+
+  </div>
+</header>
+
+<main>
+
+  <!-- HALAMAN UTAMA -->
+  <section class="beranda wadah" id="beranda">
+
+    <div class="isi-beranda">
+
+      <span class="label-kecil">
+        PILIHAN PAKAIAN SECONDHAND
+      </span>
+
+      <h1>
+        Gaya Berbeda.<br>
+        <span>Cerita Berharga.</span>
+      </h1>
+
+      <p>
+        Temukan pakaian pilihan dengan karakter unik.
+        Setiap barang punya cerita dan kesempatan
+        untuk menjadi bagian dari gaya baru lu.
+      </p>
+
+      <a href="#koleksi" class="tombol-utama">
+        Lihat Koleksi
+        <span>↗</span>
+      </a>
+
+      <div class="catatan-beranda">
+        <span></span>
+        BARANG PILIHAN · STOK TERBATAS
+      </div>
+
+    </div>
+
+    <div class="visual-beranda">
+
+      <div class="gambar-utama">
+        <span>GAYA<br>SEMUANYA<br>DIMULAI DI SINI.</span>
+        <small>NAFA.FASHION · 2025</small>
+      </div>
+
+      <div class="label-gambar">
+        <strong>01</strong>
+        <span>
+          DIPILIH<br>
+          DENGAN TELITI
+        </span>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- INFORMASI KOLEKSI -->
+  <section class="pita-informasi">
+    <div class="wadah isi-pita">
+      <span>BARANG PILIHAN</span>
+      <span>✳</span>
+      <span>GAYA UNIK</span>
+      <span>✳</span>
+      <span>PAKAIAN SECONDHAND</span>
+      <span>✳</span>
+      <span>STOK TERBATAS</span>
+    </div>
+  </section>
+
+  <!-- KATALOG PRODUK -->
+  <section class="bagian-koleksi wadah" id="koleksi">
+
+    <div class="judul-bagian">
+
+      <div>
+        <span class="label-kecil">KOLEKSI KAMI</span>
+        <h2>Temukan <span>pilihanmu.</span></h2>
+      </div>
+
+      <p>
+        Berbagai pilihan pakaian dengan karakter
+        dan keunikan tersendiri.
+      </p>
+
+    </div>
+
+    <div class="alat-katalog">
+
+      <span id="jumlahProduk">MEMUAT PRODUK...</span>
+
+      <select id="urutkanProduk">
+        <option value="terbaru">Produk Terbaru</option>
+        <option value="termurah">Harga Terendah</option>
+        <option value="termahal">Harga Tertinggi</option>
+      </select>
+
+    </div>
+
+    <div class="daftar-produk" id="daftarProduk">
+
+      <div class="status-memuat">
+        <div class="pemutar"></div>
+        <p>Sedang menyiapkan koleksi...</p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <!-- TENTANG KAMI -->
+  <section class="bagian-tentang" id="tentang">
+
+    <div class="wadah isi-tentang">
+
+      <span class="label-kecil">TENTANG NAFA.FASHION</span>
+
+      <h2>
+        Gaya bukan tentang<br>
+        <span>mengikuti semua orang.</span>
+      </h2>
+
+      <p>
+        NAFA.FASHION menghadirkan pakaian secondhand
+        pilihan yang memiliki karakter, kualitas,
+        dan cerita tersendiri.
+      </p>
+
+    </div>
+
+  </section>
+
+</main>
+
+<!-- KAKI HALAMAN -->
+<footer class="kaki-halaman">
+
+  <div class="wadah isi-kaki">
+
+    <strong>NAFA<span>.</span>FASHION</strong>
+
+    <p>Pilihan unik. Gaya milik sendiri.</p>
+
+    <small>© 2025 NAFA.FASHION</small>
+
+  </div>
+
+  <!-- PANEL KERANJANG -->
+<div class="lapisan-keranjang" id="lapisanKeranjang">
+  <div class="latar-keranjang" id="latarKeranjang"></div>
+
+  <section class="panel-keranjang">
+    <div class="kepala-keranjang">
+      <div>
+        <span class="teks-kecil">BELANJA KAMU</span>
+        <h2>Keranjang</h2>
+      </div>
+
+      <button class="tutup-keranjang" id="tutupKeranjang" type="button">
+        ✕
+      </button>
+    </div>
+
+    <div class="isi-keranjang" id="isiKeranjang">
+      <div class="keranjang-kosong">
+        <div class="ikon-kosong">🛍️</div>
+        <h3>Keranjang masih kosong</h3>
+        <p>Yuk, temukan barang yang kamu suka.</p>
+      </div>
+    </div>
+
+    <div class="ringkasan-keranjang">
+      <div class="baris-total">
+        <span>Total belanja</span>
+        <strong id="totalKeranjang">Rp0</strong>
+      </div>
+
+      <button
+        class="tombol-lanjut-checkout"
+        id="tombolCheckout"
+        type="button"
+        disabled
+      >
+        Lanjut ke Pembayaran
+      </button>
+
+      <p class="catatan-keranjang">
+        Stok dan harga akan diperiksa kembali saat pemesanan.
+      </p>
+    </div>
+  </section>
+</div>
+
+  <!-- PANEL CHECKOUT -->
+<div class="lapisan-checkout" id="lapisanCheckout">
+  <div class="latar-checkout" id="latarCheckout"></div>
+
+  <section class="panel-checkout">
+    <div class="kepala-checkout">
+      <div>
+        <span class="teks-kecil">LANGKAH TERAKHIR</span>
+        <h2>Data Pemesanan</h2>
+      </div>
+      <button type="button" class="tutup-checkout" id="tutupCheckout">✕</button>
+    </div>
+
+    <form id="formCheckout" novalidate>
+      <div class="form-checkout">
+        <label for="namaPembeli">Nama penerima</label>
+        <input id="namaPembeli" type="text" maxlength="80"
+          placeholder="Masukkan nama lengkap">
+        <small class="pesan-error" id="errorNama"></small>
+
+        <label for="teleponPembeli">Nomor WhatsApp</label>
+        <input id="teleponPembeli" type="tel" maxlength="20"
+          placeholder="Contoh: 08xxxxxxxxxx">
+        <small class="pesan-error" id="errorTelepon"></small>
+
+        <label for="alamatPembeli">Alamat lengkap</label>
+        <textarea id="alamatPembeli" rows="3" maxlength="500"
+          placeholder="Jalan, nomor rumah, kelurahan, kecamatan, kota, kode pos"></textarea>
+        <small class="pesan-error" id="errorAlamat"></small>
+
+        <label for="metodePembayaran">Metode pembayaran</label>
+        <select id="metodePembayaran">
+          <option value="">Pilih metode pembayaran</option>
+          <option value="Transfer Bank">Transfer Bank</option>
+          <option value="QRIS">QRIS</option>
+          <option value="DANA">DANA</option>
+          <option value="GoPay">GoPay</option>
+          <option value="OVO">OVO</option>
+          <option value="ShopeePay">ShopeePay</option>
+        </select>
+        <small class="pesan-error" id="errorPembayaran"></small>
+      </div>
+
+      <div class="ringkasan-checkout">
+        <span>Total pesanan</span>
+        <strong id="totalCheckout">Rp0</strong>
+      </div>
+
+      <p class="catatan-checkout">
+        Pesanan akan tercatat setelah berhasil diproses. Pembayaran belum
+        terverifikasi secara otomatis.
+      </p>
+
+      <div class="pesan-checkout" id="pesanCheckout"></div>
+
+      <button type="submit" class="tombol-buat-pesanan" id="tombolBuatPesanan">
+        Buat Pesanan
+      </button>
+    </form>
+  </section>
+</div>
+
+<!-- HASIL PEMESANAN -->
+<div class="lapisan-hasil" id="lapisanHasil">
+  <div class="kartu-hasil">
+    <div class="ikon-hasil">✓</div>
+    <span class="teks-kecil">PEMESANAN BERHASIL</span>
+    <h2>Pesanan tercatat!</h2>
+    <p class="teks-hasil">Simpan kode pesanan berikut untuk keperluan konfirmasi.</p>
+
+    <div class="kode-pesanan" id="kodePesananHasil">-</div>
+    <div class="total-hasil" id="totalPesananHasil">Rp0</div>
+    <span class="status-hasil">Menunggu pembayaran</span>
+
+    <button type="button" id="tombolUnduhBukti">
+  Unduh Bukti Pesanan JPG
+</button>
+
+    <button type="button" id="tombolTutupHasil">
+      Selesai
+    </button>
+  </div>
+</div>
+
+</footer>
+
+  </div>
+
+  <script>
+    // =====================================
+    // PENGATURAN KONEKSI SUPABASE
+    // =====================================
+
+    const SUPABASE_URL =
+      "https://nlbfyfaoxdgkozvwgagp.supabase.co";
+
+    const SUPABASE_ANON_KEY =
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5sYmZ5ZmFveGRna296dndnYWdwIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTM0MDQ5MjcsImV4cCI6MjEwODk4MDkyN30.jao47Rv90PXt0We0-ZfMnZXWkm7FqGkTs46LlFvPH08";
+
+    const db = window.supabase.createClient(
+      SUPABASE_URL,
+      SUPABASE_ANON_KEY
+    );
+
+    // =====================================
+    // PENGATURAN TOKO
+    // =====================================
+
+    const NAMA_TOKO = "NAFA.FASHION";
+
+    // DATA PRODUK DAN KERANJANG
+let semuaProduk = [];
+let keranjang = [];
+
+const formatRupiah = (angka) => {
+  return new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0
+  }).format(Number(angka) || 0);
+};
+
+// NOTIFIKASI TANPA POP-UP BROWSER
+function tampilkanNotifikasi(pesan, jenis = "berhasil") {
+  let wadah = document.getElementById("wadahNotifikasi");
+
+  if (!wadah) {
+    wadah = document.createElement("div");
+    wadah.id = "wadahNotifikasi";
+    wadah.className = "wadah-notifikasi";
+    document.body.appendChild(wadah);
+  }
+
+  const elemen = document.createElement("div");
+  elemen.className = jenis === "gagal"
+    ? "notifikasi gagal"
+    : "notifikasi";
+
+  elemen.textContent = pesan;
+  wadah.appendChild(elemen);
+
+  setTimeout(() => elemen.remove(), 3000);
+}
+
+// AMANKAN TEKS
+function amankanTeks(teks) {
+  return String(teks ?? "").replace(/[&<>"']/g, karakter => {
+    const pengganti = {
+      "&": "&amp;",
+      "<": "&lt;",
+      ">": "&gt;",
+      '"': "&quot;",
+      "'": "&#039;"
+    };
+
+    return pengganti[karakter];
+  });
+}
+
+// URL FOTO
+function dapatkanUrlFoto(foto) {
+  if (!foto) return "";
+
+  const nilai = String(foto).trim();
+
+  if (/^https?:\/\//i.test(nilai)) {
+    return nilai;
+  }
+
+  return db.storage
+    .from("product-images")
+    .getPublicUrl(nilai.replace(/^\/+/, ""))
+    .data.publicUrl;
+}
+
+// AMBIL PRODUK DARI SUPABASE
+async function muatProduk() {
+  const daftar = document.getElementById("daftarProduk");
+  const jumlah = document.getElementById("jumlahProduk");
+
+  daftar.innerHTML = `
+    <div class="status-memuat">
+      <div class="pemutar"></div>
+      <p>Sedang mengambil koleksi...</p>
+    </div>
+  `;
+
+  try {
+    const { data, error } = await db
+      .from("products")
+      .select("id,name,price,size,condition,stock,description,photo,is_active,created_at")
+      .eq("is_active", true)
+      .order("created_at", { ascending: false });
+
+    if (error) throw error;
+
+    semuaProduk = data || [];
+    jumlah.textContent = `${semuaProduk.length} PRODUK`;
+
+    tampilkanProduk();
+
+  } catch (error) {
+    console.error("Gagal memuat produk:", error);
+
+    jumlah.textContent = "PRODUK TIDAK TERSEDIA";
+
+    daftar.innerHTML = `
+      <div class="produk-kosong">
+        <strong>Koleksi belum dapat dimuat.</strong><br>
+        Periksa koneksi internet dan konfigurasi Supabase.
+        <br><br>
+        <button class="tombol-tambah" id="cobaMuatLagi">
+          Coba Muat Ulang
+        </button>
+      </div>
+    `;
+
+    document.getElementById("cobaMuatLagi")
+      .addEventListener("click", muatProduk);
+  }
+}
+
+// TAMPILKAN PRODUK
+function tampilkanProduk() {
+  const daftar = document.getElementById("daftarProduk");
+  const pilihan = document.getElementById("urutkanProduk").value;
+
+  let produk = [...semuaProduk];
+
+  if (pilihan === "termurah") {
+    produk.sort((a, b) => Number(a.price) - Number(b.price));
+  }
+
+  if (pilihan === "termahal") {
+    produk.sort((a, b) => Number(b.price) - Number(a.price));
+  }
+
+  if (produk.length === 0) {
+    daftar.innerHTML = `
+      <div class="produk-kosong">
+        <strong>Belum ada produk tersedia.</strong><br>
+        Nantikan koleksi terbaru NAFA.FASHION.
+      </div>
+    `;
+    return;
+  }
+
+  daftar.innerHTML = produk.map(item => {
+    const nama = amankanTeks(item.name);
+    const kondisi = amankanTeks(item.condition || "Pilihan");
+    const ukuran = amankanTeks(item.size || "Tidak tersedia");
+    const harga = formatRupiah(item.price);
+    const foto = dapatkanUrlFoto(item.photo);
+    const stok = Number(item.stock) || 0;
+
+    return `
+      <article class="kartu-produk">
+        <div class="foto-produk">
+          ${
+            foto
+              ? `<img src="${amankanTeks(foto)}"
+                     alt="${nama}" loading="lazy">`
+              : `<div class="foto-kosong">NAFA.FASHION</div>`
+          }
+          <span class="label-kondisi">${kondisi}</span>
+        </div>
+
+        <div class="info-produk">
+          <h3 class="nama-produk">${nama}</h3>
+          <p class="detail-produk">Ukuran: ${ukuran}</p>
+          <div class="harga-produk">${harga}</div>
+
+          <button class="tombol-tambah"
+            data-tambah="${Number(item.id)}"
+            ${stok <= 0 ? "disabled" : ""}>
+            ${stok <= 0 ? "Stok Habis" : "Tambah ke Keranjang"}
+          </button>
+        </div>
+      </article>
+    `;
+  }).join("");
+
+  daftar.querySelectorAll("[data-tambah]").forEach(tombol => {
+    tombol.addEventListener("click", () => {
+      tambahKeKeranjang(Number(tombol.dataset.tambah));
+    });
+  });
+
+  daftar.querySelectorAll(".foto-produk img").forEach(gambar => {
+    gambar.addEventListener("error", () => {
+      const wadah = gambar.parentElement;
+      gambar.remove();
+
+      const pengganti = document.createElement("div");
+      pengganti.className = "foto-kosong";
+      pengganti.textContent = "NAFA.FASHION";
+      wadah.prepend(pengganti);
+    }, { once: true });
+  });
+}
+
+// SIMPAN KERANJANG
+function simpanKeranjang() {
+  try {
+    localStorage.setItem(
+      "nation_trift_cart_v1",
+      JSON.stringify(keranjang)
+    );
+  } catch (error) {
+    console.error("Keranjang gagal disimpan:", error);
+  }
+}
+    /* =========================
+   SISTEM KERANJANG
+========================= */
+
+const lapisanKeranjang =
+  document.getElementById("lapisanKeranjang");
+
+function bukaKeranjang() {
+  lapisanKeranjang.classList.add("aktif");
+  document.body.style.overflow = "hidden";
+  tampilkanIsiKeranjang();
+}
+
+function tutupPanelKeranjang() {
+  lapisanKeranjang.classList.remove("aktif");
+  document.body.style.overflow = "";
+}
+
+function tampilkanIsiKeranjang() {
+  const wadah = document.getElementById("isiKeranjang");
+  const totalTeks = document.getElementById("totalKeranjang");
+  const tombolCheckout = document.getElementById("tombolCheckout");
+
+  let total = 0;
+
+  if (!Array.isArray(keranjang)) {
+    keranjang = [];
+  }
+
+  keranjang = keranjang.filter(item =>
+    semuaProduk.some(p => String(p.id) === String(item.id))
+  );
+
+  if (keranjang.length === 0) {
+    wadah.innerHTML = `
+      <div class="keranjang-kosong">
+        <div class="ikon-kosong">🛍️</div>
+        <h3>Keranjang masih kosong</h3>
+        <p>Yuk, temukan barang yang kamu suka.</p>
+      </div>
+    `;
+
+    totalTeks.textContent = formatRupiah(0);
+    tombolCheckout.disabled = true;
+    simpanKeranjang();
+    return;
+  }
+
+  wadah.innerHTML = keranjang.map(item => {
+    const produk = semuaProduk.find(
+      p => String(p.id) === String(item.id)
+    );
+
+    if (!produk) return "";
+
+    const jumlah = Math.max(1, Number(item.jumlah) || 1);
+    const harga = Number(produk.price) || 0;
+    total += harga * jumlah;
+
+    const foto = dapatkanUrlFoto(produk.photo);
+
+    return `
+      <div class="item-keranjang">
+        <img
+          class="foto-keranjang"
+          src="${amankanTeks(foto)}"
+          alt="${amankanTeks(produk.name)}"
+          onerror="this.style.visibility='hidden'"
+        >
+
+        <div class="info-keranjang">
+          <h4>${amankanTeks(produk.name)}</h4>
+          <p>Ukuran: ${amankanTeks(produk.size || "-")}</p>
+          <div class="harga-keranjang">
+            ${formatRupiah(harga)}
+          </div>
+
+          <div class="kontrol-jumlah">
+            <button type="button"
+              data-aksi-keranjang="kurang"
+              data-id="${produk.id}">−</button>
+
+            <span>${jumlah}</span>
+
+            <button type="button"
+              data-aksi-keranjang="tambah"
+              data-id="${produk.id}"
+              ${jumlah >= Number(produk.stock) ? "disabled" : ""}>+</button>
+
+            <button type="button"
+              class="hapus-item"
+              data-aksi-keranjang="hapus"
+              data-id="${produk.id}">
+              Hapus
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join("");
+
+  totalTeks.textContent = formatRupiah(total);
+  tombolCheckout.disabled = total <= 0;
+
+  simpanKeranjang();
+  perbaruiJumlahKeranjang();
+}
+
+function ubahJumlahKeranjang(id, aksi) {
+  const item = keranjang.find(
+    data => String(data.id) === String(id)
+  );
+
+  const produk = semuaProduk.find(
+    data => String(data.id) === String(id)
+  );
+
+  if (!item || !produk) return;
+
+  const stok = Number(produk.stock) || 0;
+
+  if (aksi === "tambah") {
+    if (item.jumlah >= stok) {
+      tampilkanNotifikasi("Jumlah melebihi stok tersedia.", true);
+      return;
+    }
+
+    item.jumlah++;
+  }
+
+  if (aksi === "kurang") {
+    item.jumlah--;
+
+    if (item.jumlah <= 0) {
+      keranjang = keranjang.filter(
+        data => String(data.id) !== String(id)
+      );
+    }
+  }
+
+  if (aksi === "hapus") {
+    keranjang = keranjang.filter(
+      data => String(data.id) !== String(id)
+    );
+  }
+
+  simpanKeranjang();
+  tampilkanIsiKeranjang();
+}
+
+document.getElementById("tombolKeranjang")
+  .addEventListener("click", bukaKeranjang);
+
+document.getElementById("tutupKeranjang")
+  .addEventListener("click", tutupPanelKeranjang);
+
+document.getElementById("latarKeranjang")
+  .addEventListener("click", tutupPanelKeranjang);
+
+document.getElementById("isiKeranjang")
+  .addEventListener("click", function(event) {
+    const tombol = event.target.closest("[data-aksi-keranjang]");
+    if (!tombol) return;
+
+    ubahJumlahKeranjang(
+      tombol.dataset.id,
+      tombol.dataset.aksiKeranjang
+    );
+  });
+
+document.getElementById("tombolCheckout")
+  .addEventListener("click", function() {
+    if (keranjang.length === 0) return;
+
+    tampilkanNotifikasi(
+      "Keranjang siap. Formulir pembayaran dibuat pada tahap berikutnya."
+    );
+  });
+
+// Perbarui tampilan setelah data produk dimuat
+tampilkanIsiKeranjang();
+
+// MUAT KERANJANG
+function muatKeranjang() {
+  try {
+    const tersimpan = localStorage.getItem(
+      "nation_trift_cart_v1"
+    );
+
+    keranjang = tersimpan ? JSON.parse(tersimpan) : [];
+
+    if (!Array.isArray(keranjang)) keranjang = [];
+  } catch (error) {
+    keranjang = [];
+  }
+
+  perbaruiJumlahKeranjang();
+}
+
+// PERBARUI JUMLAH
+function perbaruiJumlahKeranjang() {
+  const jumlah = keranjang.reduce(
+    (total, item) => total + item.jumlah,
+    0
+  );
+
+  document.getElementById("jumlahKeranjang").textContent = jumlah;
+}
+
+// TAMBAHKAN PRODUK
+function tambahKeKeranjang(id) {
+  const produk = semuaProduk.find(
+    item => Number(item.id) === id
+  );
+
+  if (!produk) {
+    tampilkanNotifikasi("Produk tidak ditemukan.", "gagal");
+    return;
+  }
+
+  const stok = Number(produk.stock) || 0;
+
+  const itemLama = keranjang.find(
+    item => Number(item.id) === id
+  );
+
+  if (itemLama && itemLama.jumlah >= stok) {
+    tampilkanNotifikasi(
+      "Jumlah barang sudah mencapai batas stok.",
+      "gagal"
+    );
+    return;
+  }
+
+  if (!itemLama && stok <= 0) {
+    tampilkanNotifikasi("Stok produk sudah habis.", "gagal");
+    return;
+  }
+
+  if (itemLama) {
+    itemLama.jumlah++;
+  } else {
+    keranjang.push({
+      id: Number(produk.id),
+      nama: produk.name,
+      harga: Number(produk.price),
+      foto: produk.photo || "",
+      ukuran: produk.size || "",
+      jumlah: 1
+    });
+  }
+
+  simpanKeranjang();
+  perbaruiJumlahKeranjang();
+
+  tampilkanNotifikasi(
+    produk.name + " ditambahkan ke keranjang."
+  );
+}
+
+// EVENT HALAMAN
+document
+  .getElementById("urutkanProduk")
+  .addEventListener("change", tampilkanProduk);
+
+document
+  .getElementById("tombolKeranjang")
+  .addEventListener("click", () => {
+    tampilkanNotifikasi(
+      "Halaman keranjang akan diaktifkan pada tahap berikutnya."
+    );
+  });
+
+// JALANKAN
+muatKeranjang();
+muatProduk();
+
+    console.log("NAFA.FASHION berhasil dimuat.");
+  /* =========================
+   SISTEM CHECKOUT
+========================= */
+
+const URL_CHECKOUT =
+  "https://nlbfyfaoxdgkozvwgagp.supabase.co/functions/v1/quick-function";
+
+const lapisanCheckout =
+  document.getElementById("lapisanCheckout");
+
+const lapisanHasil =
+  document.getElementById("lapisanHasil");
+
+function bukaCheckout() {
+  if (!keranjang.length) {
+    tampilkanNotifikasi("Keranjang kamu masih kosong.", true);
+    return;
+  }
+
+  tutupPanelKeranjang();
+
+  document.getElementById("totalCheckout").textContent =
+    hitungTotalCheckout();
+
+  bersihkanPesanCheckout();
+  lapisanCheckout.classList.add("aktif");
+  document.body.style.overflow = "hidden";
+}
+
+function tutupCheckout() {
+  lapisanCheckout.classList.remove("aktif");
+  document.body.style.overflow = "";
+}
+
+function hitungTotalCheckout() {
+  let total = 0;
+
+  keranjang.forEach(item => {
+    const produk = semuaProduk.find(
+      p => String(p.id) === String(item.id)
+    );
+
+    if (produk) {
+      total += Number(produk.price) * Number(item.jumlah);
+    }
+  });
+
+  return formatRupiah(total);
+}
+
+function bersihkanPesanCheckout() {
+  [
+    "errorNama",
+    "errorTelepon",
+    "errorAlamat",
+    "errorPembayaran"
+  ].forEach(id => {
+    document.getElementById(id).textContent = "";
+  });
+
+  const pesan = document.getElementById("pesanCheckout");
+  pesan.textContent = "";
+  pesan.classList.remove("terlihat");
+}
+
+function tampilkanErrorCheckout(id, pesan) {
+  document.getElementById(id).textContent = pesan;
+}
+
+function validasiCheckout() {
+  bersihkanPesanCheckout();
+
+  const nama = document.getElementById("namaPembeli").value.trim();
+  const telepon = document.getElementById("teleponPembeli").value.trim();
+  const alamat = document.getElementById("alamatPembeli").value.trim();
+  const pembayaran = document.getElementById("metodePembayaran").value;
+
+  let valid = true;
+
+  if (nama.length < 3) {
+    tampilkanErrorCheckout("errorNama", "Nama minimal 3 karakter.");
+    valid = false;
+  }
+
+  const nomorBersih = telepon.replace(/[\s-]/g, "");
+
+  if (!/^\+?[0-9]{9,16}$/.test(nomorBersih)) {
+    tampilkanErrorCheckout(
+      "errorTelepon",
+      "Masukkan nomor telepon yang valid."
+    );
+    valid = false;
+  }
+
+  if (alamat.length < 10) {
+    tampilkanErrorCheckout(
+      "errorAlamat",
+      "Alamat terlalu singkat. Lengkapi alamat pengiriman."
+    );
+    valid = false;
+  }
+
+  const metodeDiizinkan = [
+    "Transfer Bank",
+    "QRIS",
+    "DANA",
+    "GoPay",
+    "OVO",
+    "ShopeePay"
+  ];
+
+  if (!metodeDiizinkan.includes(pembayaran)) {
+    tampilkanErrorCheckout(
+      "errorPembayaran",
+      "Pilih metode pembayaran terlebih dahulu."
+    );
+    valid = false;
+  }
+
+  return valid;
+}
+
+function tampilkanPesanCheckout(pesan) {
+  const elemen = document.getElementById("pesanCheckout");
+  elemen.textContent = pesan;
+  elemen.classList.add("terlihat");
+}
+
+async function kirimPesanan(event) {
+  event.preventDefault();
+
+  if (!validasiCheckout()) return;
+
+  if (!Array.isArray(keranjang) || keranjang.length === 0) {
+    tampilkanPesanCheckout("Keranjang kamu kosong.");
+    return;
+  }
+
+  const tombol = document.getElementById("tombolBuatPesanan");
+
+  const nama = document.getElementById("namaPembeli").value.trim();
+  const telepon = document.getElementById("teleponPembeli").value.trim();
+  const alamat = document.getElementById("alamatPembeli").value.trim();
+  const pembayaran = document.getElementById("metodePembayaran").value;
+
+  // Periksa kembali produk sebelum dikirim
+  const daftarItem = [];
+
+  for (const item of keranjang) {
+    const produk = semuaProduk.find(
+      p => String(p.id) === String(item.id)
+    );
+
+    if (!produk) {
+      tampilkanPesanCheckout(
+        "Ada produk yang sudah tidak tersedia. Muat ulang halaman dan periksa keranjang."
+      );
+      return;
+    }
+
+    const jumlah = Number(item.jumlah);
+    const stok = Number(produk.stock);
+
+    if (
+      !Number.isInteger(jumlah) ||
+      jumlah < 1 ||
+      jumlah > stok ||
+      produk.is_active !== true
+    ) {
+      tampilkanPesanCheckout(
+        `Stok ${produk.name} tidak mencukupi atau produk sudah tidak aktif.`
+      );
+      return;
+    }
+
+    daftarItem.push({
+      product_id: Number(produk.id),
+      quantity: jumlah
+    });
+  }
+
+  tombol.disabled = true;
+  tombol.textContent = "Sedang memproses...";
+
+  try {
+    const respons = await fetch(URL_CHECKOUT, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "apikey": SUPABASE_ANON_KEY,
+        "Authorization": "Bearer " + SUPABASE_ANON_KEY
+      },
+      body: JSON.stringify({
+        customer_name: nama,
+        customer_phone: telepon,
+        customer_address: alamat,
+        payment_method: pembayaran,
+        items: daftarItem
+      })
+    });
+
+    let hasil;
+
+    try {
+      hasil = await respons.json();
+    } catch {
+      throw new Error("Server memberikan jawaban yang tidak valid.");
+    }
+
+    if (!respons.ok || !hasil || hasil.success !== true) {
+      throw new Error(
+        hasil?.error || hasil?.message ||
+        "Pesanan gagal diproses. Silakan coba kembali."
+      );
+    }
+
+    // Simpan informasi pesanan untuk tahap bukti transaksi
+    window.pesananTerakhir = {
+  kode: hasil.order_code,
+  id: hasil.order_id,
+  total: Number(hasil.total_price),
+  nama: nama,
+  telepon: telepon,
+  alamat: alamat,
+  pembayaran: pembayaran,
+  tanggal: new Date().toISOString(),
+
+  items: daftarItem.map(item => {
+    const produk = semuaProduk.find(
+      p => String(p.id) === String(item.product_id)
+    );
+
+    return {
+      nama: produk ? produk.name : "Produk",
+      ukuran: produk ? produk.size : "-",
+      harga: produk ? Number(produk.price) : 0,
+      jumlah: item.quantity
+    };
+  })
+};
+
+    // Kosongkan keranjang setelah server menyatakan berhasil
+    keranjang = [];
+    simpanKeranjang();
+    perbaruiJumlahKeranjang();
+    tampilkanIsiKeranjang();
+
+    document.getElementById("kodePesananHasil").textContent =
+      hasil.order_code || "-";
+
+    document.getElementById("totalPesananHasil").textContent =
+      formatRupiah(Number(hasil.total_price) || 0);
+
+    tutupCheckout();
+
+    lapisanHasil.classList.add("aktif");
+    document.body.style.overflow = "hidden";
+
+    document.getElementById("formCheckout").reset();
+
+    // Muat ulang stok terbaru dari database
+    muatProduk();
+
+  } catch (error) {
+    tampilkanPesanCheckout(
+      error.message || "Terjadi kesalahan saat membuat pesanan."
+    );
+  } finally {
+    tombol.disabled = false;
+    tombol.textContent = "Buat Pesanan";
+  }
+}
+
+/* Hubungkan tombol dan formulir */
+
+document.getElementById("tombolCheckout")
+  .addEventListener("click", bukaCheckout);
+
+document.getElementById("tutupCheckout")
+  .addEventListener("click", tutupCheckout);
+
+document.getElementById("latarCheckout")
+  .addEventListener("click", tutupCheckout);
+
+document.getElementById("formCheckout")
+  .addEventListener("submit", kirimPesanan);
+
+document.getElementById("tombolTutupHasil")
+  .addEventListener("click", function() {
+    lapisanHasil.classList.remove("aktif");
+    document.body.style.overflow = "";
+  });
+    /* =========================
+   PEMBUAT BUKTI PESANAN JPG
+========================= */
+
+function unduhBuktiPesanan() {
+  const data = window.pesananTerakhir;
+
+  if (!data || !data.kode) {
+    tampilkanNotifikasi(
+      "Data pesanan tidak ditemukan.",
+      true
+    );
+    return;
+  }
+
+  const tombol = document.getElementById("tombolUnduhBukti");
+  tombol.disabled = true;
+  tombol.textContent = "Sedang membuat bukti...";
+
+  try {
+    const canvas = document.createElement("canvas");
+    const ctx = canvas.getContext("2d");
+
+    canvas.width = 1000;
+    canvas.height = 1400;
+
+    const lebar = canvas.width;
+    const tinggi = canvas.height;
+
+    // Latar belakang
+    ctx.fillStyle = "#f5f6f1";
+    ctx.fillRect(0, 0, lebar, tinggi);
+
+    // Kartu utama
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(55, 55, 890, 1290);
+
+    // Header
+    ctx.fillStyle = "#171717";
+    ctx.fillRect(55, 55, 890, 230);
+
+    ctx.fillStyle = "#c5f36b";
+    ctx.font = "bold 48px Arial";
+    ctx.fillText("NAFA.FASHION", 105, 145);
+
+    ctx.fillStyle = "#ffffff";
+    ctx.font = "24px Arial";
+    ctx.fillText("BUKTI PEMESANAN", 105, 205);
+
+    // Status
+    ctx.fillStyle = "#eff8e5";
+    ctx.fillRect(105, 325, 790, 70);
+
+    ctx.fillStyle = "#547c2c";
+    ctx.font = "bold 25px Arial";
+    ctx.fillText("PESANAN BERHASIL DICATAT", 130, 370);
+
+    // Kode pesanan
+    ctx.fillStyle = "#777777";
+    ctx.font = "22px Arial";
+    ctx.fillText("KODE PESANAN", 105, 455);
+
+    ctx.fillStyle = "#171717";
+    ctx.font = "bold 38px Arial";
+    ctx.fillText(String(data.kode), 105, 510);
+
+    // Garis
+    ctx.strokeStyle = "#e5e5e5";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(105, 550);
+    ctx.lineTo(895, 550);
+    ctx.stroke();
+
+    // Data pembeli
+    ctx.fillStyle = "#777777";
+    ctx.font = "bold 21px Arial";
+    ctx.fillText("INFORMASI PEMBELI", 105, 605);
+
+    ctx.fillStyle = "#171717";
+    ctx.font = "24px Arial";
+
+    function gambarBaris(label, nilai, y) {
+      ctx.fillStyle = "#777777";
+      ctx.font = "20px Arial";
+      ctx.fillText(label, 105, y);
+
+      ctx.fillStyle = "#171717";
+      ctx.font = "bold 23px Arial";
+      ctx.fillText(
+        String(nilai || "-").slice(0, 55),
+        105,
+        y + 36
+      );
+    }
+
+    gambarBaris("Nama penerima", data.nama, 655);
+    gambarBaris("Nomor WhatsApp", data.telepon, 755);
+    gambarBaris("Metode pembayaran", data.pembayaran, 855);
+
+    // Daftar barang
+    ctx.strokeStyle = "#e5e5e5";
+    ctx.beginPath();
+    ctx.moveTo(105, 920);
+    ctx.lineTo(895, 920);
+    ctx.stroke();
+
+    ctx.fillStyle = "#777777";
+    ctx.font = "bold 21px Arial";
+    ctx.fillText("RINGKASAN BARANG", 105, 970);
+
+    let posisiY = 1025;
+    const daftar = Array.isArray(data.items) ? data.items : [];
+
+    daftar.slice(0, 3).forEach(item => {
+      const namaProduk = String(item.nama || "Produk");
+
+      ctx.fillStyle = "#171717";
+      ctx.font = "bold 21px Arial";
+      ctx.fillText(namaProduk.slice(0, 35), 105, posisiY);
+
+      ctx.fillStyle = "#777777";
+      ctx.font = "18px Arial";
+      ctx.fillText(
+        `${item.jumlah} x ${formatRupiah(item.harga)}`,
+        105,
+        posisiY + 30
+      );
+
+      posisiY += 75;
+    });
+
+    if (daftar.length > 3) {
+      ctx.fillStyle = "#777777";
+      ctx.font = "18px Arial";
+      ctx.fillText(
+        `Dan ${daftar.length - 3} barang lainnya`,
+        105,
+        posisiY
+      );
+    }
+
+    // Total
+    ctx.strokeStyle = "#e5e5e5";
+    ctx.beginPath();
+    ctx.moveTo(105, 1230);
+    ctx.lineTo(895, 1230);
+    ctx.stroke();
+
+    ctx.fillStyle = "#777777";
+    ctx.font = "22px Arial";
+    ctx.fillText("TOTAL PESANAN", 105, 1280);
+
+    ctx.fillStyle = "#171717";
+    ctx.font = "bold 34px Arial";
+    ctx.fillText(formatRupiah(data.total), 105, 1325);
+
+    // Unduh JPG
+    canvas.toBlob(function(blob) {
+      if (!blob) {
+        tampilkanNotifikasi(
+          "Gagal membuat gambar. Coba kembali.",
+          true
+        );
+        return;
+      }
+
+      const url = URL.createObjectURL(blob);
+      const tautan = document.createElement("a");
+
+      tautan.href = url;
+      tautan.download = `Bukti-${data.kode}.jpg`;
+
+      document.body.appendChild(tautan);
+      tautan.click();
+      tautan.remove();
+
+      setTimeout(() => URL.revokeObjectURL(url), 1500);
+
+      tampilkanNotifikasi(
+        "Bukti pesanan berhasil dibuat."
+      );
+
+      tombol.disabled = false;
+      tombol.textContent = "Unduh Bukti Pesanan JPG";
+
+    }, "image/jpeg", 0.95);
+
+  } catch (error) {
+    tampilkanNotifikasi(
+      "Gagal membuat bukti pesanan.",
+      true
+    );
+
+    tombol.disabled = false;
+    tombol.textContent = "Unduh Bukti Pesanan JPG";
+  }
+}
+
+document.getElementById("tombolUnduhBukti")
+  .addEventListener("click", unduhBuktiPesanan);
+  </script>
+
+</body>
+</html>
